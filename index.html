@@ -20,46 +20,46 @@
 <div class="gallery" id="gallery"></div>
 
 <script>
-// الشعر الجاهز
-const poems = [
-    "أحبك جدًا… وأستطيع أن أحبك أكثر مما أستطيع أن أقول. - نزار قباني",
-    "العيون التي تُرى من بعيد تجعل القلب يشتعل شوقاً. - نزار قباني",
-    "عيناكِ تبدآن كل القصائد. - جبران خليل جبران",
-    "في عينيكِ أرى أعمق بحار الحب. - جبران خليل جبران",
-    "إذا نظرت العيون، اكتملت الحكايات. - أحمد شوقي",
-    "العين مرآة القلب، وفيها ترى كل الأسرار. - أحمد شوقي",
-    "إذا كانت العيون قد أسرت قلبي، فما بالك بالحُب كله. - المتنبي",
-    "على قدر الهوى تأتي العيون فتبوح بما في القلب. - المتنبي",
-    "العين تنطق بما يختفي عن اللسان. - أبو تمام",
-    "من نظر بعين الحب، رأى ما لا يراه غيره. - أبو تمام"
-];
-
-// أسماء الصور
-const images = [
-    "images/IMG-20250806-WA0039.jpg",
-    "images/IMG-20250806-WA0056.jpg",
-    "images/IMG-20250806-WA0060.jpg",
-    "images/IMG-20250817-WA0147.jpg",
-    "images/IMG-20250903-WA0110(1).jpg",
-    "images/IMG-20250906-WA0064.jpg"
+// أسماء الصور مع الشعر الخاص لكل صورة
+const photos = [
+    {
+        src: "images/IMG-20250806-WA0039.jpg",
+        poem: "أحبك كما أنت، بلا شروط، بلا حدود… أنت البداية والنهاية."
+    },
+    {
+        src: "images/IMG-20250806-WA0056.jpg",
+        poem: "في عينيك أرى عالمي، وفي ابتسامتك أشعلت قلبي."
+    },
+    {
+        src: "images/IMG-20250806-WA0060.jpg",
+        poem: "كل يوم يمر عليّ يزيد حبي لك، وكأن قلبي لا يعرف السكون."
+    },
+    {
+        src: "images/IMG-20250817-WA0147.jpg",
+        poem: "إذا نظرت إليك العيون، فهمت معنى الحب الأبدي."
+    },
+    {
+        src: "images/IMG-20250903-WA0110(1).jpg",
+        poem: "أنت الحلم الذي تحقق، والقصيدة التي لم تنتهي."
+    },
+    {
+        src: "images/IMG-20250906-WA0064.jpg",
+        poem: "بين يديك أجد السكينة، ومعك يبتسم قلبي بلا توقف."
+    }
 ];
 
 const gallery = document.getElementById('gallery');
 
-images.forEach(imgSrc => {
-    // اختيار شعر عشوائي
-    const randomPoem = poems[Math.floor(Math.random() * poems.length)];
-
-    // إنشاء بطاقة الصورة
+photos.forEach(photo => {
     const photoCard = document.createElement('div');
     photoCard.className = 'photoCard';
 
     const img = document.createElement('img');
-    img.src = imgSrc;
+    img.src = photo.src;
 
     const comment = document.createElement('div');
     comment.className = 'comment';
-    comment.textContent = randomPoem;
+    comment.textContent = photo.poem;
 
     photoCard.appendChild(img);
     photoCard.appendChild(comment);
