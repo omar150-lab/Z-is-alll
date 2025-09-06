@@ -5,66 +5,93 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>حب حياتي ❤️</title>
 <style>
-    body { font-family: Arial, sans-serif; background-color: #ffe6e6; margin:0; padding:0; text-align:center; }
-    h1 { color:#ff3366; margin:20px 0; }
-    .gallery { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; padding:20px; }
-    .photoCard { position:relative; display:inline-block; }
-    .photoCard img { width:250px; height:250px; object-fit:cover; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.3); transition:transform 0.3s, box-shadow 0.3s; }
-    .photoCard img:hover { transform:scale(1.05); box-shadow:0 10px 20px rgba(0,0,0,0.5); }
-    .comment { position:absolute; bottom:10px; left:50%; transform:translateX(-50%); background-color:rgba(255,51,102,0.8); color:white; padding:5px 10px; border-radius:10px; font-size:14px; }
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(to bottom right, #ffe6e6, #fff0f5);
+        margin:0; padding:0; text-align:center;
+    }
+    h1 {
+        color:#ff3366; margin:20px 0; font-size:2.5em;
+        text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    }
+    .gallery {
+        display:flex; flex-wrap:wrap; justify-content:center; gap:20px; padding:20px;
+    }
+    .photoCard {
+        position:relative; display:inline-block; border-radius:15px;
+        overflow:hidden; box-shadow:0 5px 20px rgba(0,0,0,0.3);
+        transition: transform 0.5s, box-shadow 0.5s;
+    }
+    .photoCard:hover {
+        transform: scale(1.1) rotate(-1deg);
+        box-shadow:0 10px 30px rgba(255,51,102,0.5);
+    }
+    .photoCard img {
+        width:250px; height:250px; object-fit:cover; display:block;
+        border-radius:15px;
+        transition: transform 0.5s, filter 0.5s;
+    }
+    .photoCard img:hover {
+        transform: scale(1.15);
+        filter: brightness(1.2) saturate(1.3);
+    }
+    .comment {
+        position:absolute; bottom:0; left:0; width:100%;
+        background: rgba(255,51,102,0.8); color:white; padding:10px;
+        font-size:14px; box-sizing:border-box; text-align:center;
+        transition: background 0.5s, transform 0.5s;
+    }
+    .photoCard:hover .comment {
+        transform: translateY(-5px);
+        background: rgba(255,51,102,0.9);
+    }
+    .heart {
+        position:absolute; top:10px; right:10px;
+        width:25px; height:25px;
+        background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center center;
+        background-size: cover;
+        animation: pulse 1s infinite;
+    }
+    .photoCard:hover .heart {
+        animation: pulse 0.5s infinite;
+    }
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.3); }
+        100% { transform: scale(1); }
+    }
 </style>
 </head>
 <body>
 <h1>حب حياتي ❤️</h1>
 
-<div class="gallery" id="gallery"></div>
+<div class="gallery">
+    <div class="photoCard">
+        <img src="https://drive.google.com/uc?export=view&id=1xx8hv-nIB_xh7ZFiBfgHqJIoi_zGLCnp" alt="صورة حب">
+        <div class="comment">أحبك كما أنت، بلا شروط، بلا حدود… أنت البداية والنهاية.</div>
+        <div class="heart"></div>
+    </div>
+    <div class="photoCard">
+        <img src="https://drive.google.com/uc?export=view&id=14J9yvnDCg08gScRBxSKEM2ynrkU4-6ev" alt="صورة حب">
+        <div class="comment">في عينيك أرى عالمي، وفي ابتسامتك أشعلت قلبي.</div>
+        <div class="heart"></div>
+    </div>
+    <div class="photoCard">
+        <img src="https://drive.google.com/uc?export=view&id=11ptcS7jRkPydDjReoKWo4ewoFJlCVP5x" alt="صورة حب">
+        <div class="comment">كل يوم يمر عليّ يزيد حبي لك، وكأن قلبي لا يعرف السكون.</div>
+        <div class="heart"></div>
+    </div>
+    <div class="photoCard">
+        <img src="https://drive.google.com/uc?export=view&id=1WBwnZmTYxXiyBwjxYM5ot-lLDQD1xYCN" alt="صورة حب">
+        <div class="comment">إذا نظرت إليك العيون، فهمت معنى الحب الأبدي.</div>
+        <div class="heart"></div>
+    </div>
+    <div class="photoCard">
+        <img src="https://drive.google.com/uc?export=view&id=1nISGQpWEEeDBK_kC7Y-zgF_Vp6ZfUGH6" alt="صورة حب">
+        <div class="comment">بين يديك أجد السكينة، ومعك يبتسم قلبي بلا توقف.</div>
+        <div class="heart"></div>
+    </div>
+</div>
 
-<script>
-// أسماء الصور مع الشعر الخاص لكل صورة
-const photos = [
-    {
-        src: "images/IMG-20250806-WA0039.jpg",
-        poem: "أحبك كما أنت، بلا شروط، بلا حدود… أنت البداية والنهاية."
-    },
-    {
-        src: "images/IMG-20250806-WA0056.jpg",
-        poem: "في عينيك أرى عالمي، وفي ابتسامتك أشعلت قلبي."
-    },
-    {
-        src: "images/IMG-20250806-WA0060.jpg",
-        poem: "كل يوم يمر عليّ يزيد حبي لك، وكأن قلبي لا يعرف السكون."
-    },
-    {
-        src: "images/IMG-20250817-WA0147.jpg",
-        poem: "إذا نظرت إليك العيون، فهمت معنى الحب الأبدي."
-    },
-    {
-        src: "images/IMG-20250903-WA0110(1).jpg",
-        poem: "أنت الحلم الذي تحقق، والقصيدة التي لم تنتهي."
-    },
-    {
-        src: "images/IMG-20250906-WA0064.jpg",
-        poem: "بين يديك أجد السكينة، ومعك يبتسم قلبي بلا توقف."
-    }
-];
-
-const gallery = document.getElementById('gallery');
-
-photos.forEach(photo => {
-    const photoCard = document.createElement('div');
-    photoCard.className = 'photoCard';
-
-    const img = document.createElement('img');
-    img.src = photo.src;
-
-    const comment = document.createElement('div');
-    comment.className = 'comment';
-    comment.textContent = photo.poem;
-
-    photoCard.appendChild(img);
-    photoCard.appendChild(comment);
-    gallery.appendChild(photoCard);
-});
-</script>
 </body>
 </html>
