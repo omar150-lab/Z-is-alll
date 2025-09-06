@@ -22,7 +22,7 @@
 <h1>حب حياتي ❤️</h1>
 
 <div id="uploadSection">
-    <input type="file" id="uploadBtn" accept="image/*"><br>
+    <input type="text" id="imageURL" placeholder="ضع رابط الصورة هنا"><br>
     <button id="addImageBtn">أضف الصورة</button>
 </div>
 
@@ -44,7 +44,7 @@ const poems = [
 ];
 
 const addImageBtn = document.getElementById('addImageBtn');
-const uploadBtn = document.getElementById('uploadBtn');
+const imageURL = document.getElementById('imageURL');
 const gallery = document.getElementById('gallery');
 
 // تحميل الصور من Local Storage عند فتح الموقع
@@ -55,27 +55,21 @@ window.onload = () => {
 
 // إضافة صورة جديدة
 addImageBtn.addEventListener('click', () => {
-    const file = uploadBtn.files[0];
-    if(!file) { alert("اختر صورة أولاً 😅"); return; }
+    const url = imageURL.value.trim();
+    if(url === "") { alert("ضع رابط الصورة أولاً 😅"); return; }
 
-    const reader = new FileReader();
-    reader.onload = function(e){
-        const imgData = e.target.result;
+    // اختيار شعر عشوائي
+    const randomPoem = poems[Math.floor(Math.random() * poems.length)];
 
-        // اختيار شعر عشوائي
-        const randomPoem = poems[Math.floor(Math.random() * poems.length)];
+    addPhotoCard(url, randomPoem);
 
-        addPhotoCard(imgData, randomPoem);
-
-        // حفظ الصورة والتعليق في Local Storage
-        const savedImages = JSON.parse(localStorage.getItem('images')) || [];
-        savedImages.push({ data: imgData, comment: randomPoem });
-        localStorage.setItem('images', JSON.stringify(savedImages));
-    };
-    reader.readAsDataURL(file);
+    // حفظ الصورة والتعليق في Local Storage
+    const savedImages = JSON.parse(localStorage.getItem('images')) || [];
+    savedImages.push({ data: url, comment: randomPoem });
+    localStorage.setItem('images', JSON.stringify(savedImages));
 
     // تنظيف الحقل
-    uploadBtn.value = "";
+    imageURL.value = "";
 });
 
 // دالة لإضافة بطاقة الصورة إلى المعرض
