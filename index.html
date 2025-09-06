@@ -7,10 +7,6 @@
 <style>
     body { font-family: Arial, sans-serif; background-color: #ffe6e6; margin:0; padding:0; text-align:center; }
     h1 { color:#ff3366; margin:20px 0; }
-    #uploadSection { margin:20px 0; }
-    input, button { padding:10px; font-size:16px; border-radius:10px; border:1px solid #ff3366; margin:5px; }
-    button { background-color:#ff3366; color:white; border:none; cursor:pointer; }
-    button:hover { background-color:#ff6699; }
     .gallery { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; padding:20px; }
     .photoCard { position:relative; display:inline-block; }
     .photoCard img { width:250px; height:250px; object-fit:cover; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.3); transition:transform 0.3s, box-shadow 0.3s; }
@@ -21,15 +17,10 @@
 <body>
 <h1>حب حياتي ❤️</h1>
 
-<div id="uploadSection">
-    <input type="text" id="imageURL" placeholder="ضع رابط الصورة هنا"><br>
-    <button id="addImageBtn">أضف الصورة</button>
-</div>
-
 <div class="gallery" id="gallery"></div>
 
 <script>
-// قائمة الأشعار
+// الشعر الجاهز
 const poems = [
     "أحبك جدًا… وأستطيع أن أحبك أكثر مما أستطيع أن أقول. - نزار قباني",
     "العيون التي تُرى من بعيد تجعل القلب يشتعل شوقاً. - نزار قباني",
@@ -43,51 +34,37 @@ const poems = [
     "من نظر بعين الحب، رأى ما لا يراه غيره. - أبو تمام"
 ];
 
-const addImageBtn = document.getElementById('addImageBtn');
-const imageURL = document.getElementById('imageURL');
+// أسماء الصور
+const images = [
+    "images/IMG-20250806-WA0039.jpg",
+    "images/IMG-20250806-WA0056.jpg",
+    "images/IMG-20250806-WA0060.jpg",
+    "images/IMG-20250817-WA0147.jpg",
+    "images/IMG-20250903-WA0110(1).jpg",
+    "images/IMG-20250906-WA0064.jpg"
+];
+
 const gallery = document.getElementById('gallery');
 
-// تحميل الصور من Local Storage عند فتح الموقع
-window.onload = () => {
-    const savedImages = JSON.parse(localStorage.getItem('images')) || [];
-    savedImages.forEach(item => addPhotoCard(item.data, item.comment));
-};
-
-// إضافة صورة جديدة
-addImageBtn.addEventListener('click', () => {
-    const url = imageURL.value.trim();
-    if(url === "") { alert("ضع رابط الصورة أولاً 😅"); return; }
-
+images.forEach(imgSrc => {
     // اختيار شعر عشوائي
     const randomPoem = poems[Math.floor(Math.random() * poems.length)];
 
-    addPhotoCard(url, randomPoem);
-
-    // حفظ الصورة والتعليق في Local Storage
-    const savedImages = JSON.parse(localStorage.getItem('images')) || [];
-    savedImages.push({ data: url, comment: randomPoem });
-    localStorage.setItem('images', JSON.stringify(savedImages));
-
-    // تنظيف الحقل
-    imageURL.value = "";
-});
-
-// دالة لإضافة بطاقة الصورة إلى المعرض
-function addPhotoCard(imgData, commentText){
+    // إنشاء بطاقة الصورة
     const photoCard = document.createElement('div');
     photoCard.className = 'photoCard';
 
     const img = document.createElement('img');
-    img.src = imgData;
+    img.src = imgSrc;
 
     const comment = document.createElement('div');
     comment.className = 'comment';
-    comment.textContent = commentText;
+    comment.textContent = randomPoem;
 
     photoCard.appendChild(img);
     photoCard.appendChild(comment);
     gallery.appendChild(photoCard);
-}
+});
 </script>
 </body>
 </html>
